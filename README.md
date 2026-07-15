@@ -4,19 +4,6 @@ A high-performance video carousel inspired by the **Socially Approved** section 
 
 The project demonstrates how to efficiently render and manage **30–40 videos** while maintaining smooth scrolling and playback using lazy loading, virtualization techniques, Intersection Observer, and optimized React rendering.
 
----
-
-# Demo
-
-Frontend:
-```
-http://localhost:3000
-```
-
-Backend:
-```
-http://localhost:8000
-```
 
 ---
 
@@ -255,6 +242,17 @@ npx drizzle-kit push
 ```
 ---
 
+Frontend:
+```
+http://localhost:3000
+```
+
+Backend:
+```
+http://localhost:8000
+```
+
+---
 # Environment Variables (optional)
 
 ## Backend
