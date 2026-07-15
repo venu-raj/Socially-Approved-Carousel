@@ -202,7 +202,7 @@ This significantly reduces
 ## Clone Repository
 
 ```bash
-download from github
+git clone https://github.com/venu-raj/Socially-Approved-Carousel/tree/main
 ```
 
 # Frontend Setup
@@ -238,7 +238,7 @@ docker compose up --build
 ```
 
 ```bash
-npx drizzle-kit push
+cd backend/src npx drizzle-kit push
 ```
 ---
 
