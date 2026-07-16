@@ -3,13 +3,10 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "dev": "npx nodemon",
+    "dev": "tsx watch src/index.ts",
     "build": "tsc",
-    "start": "node dist/server.js",
-    "db:generate": "drizzle-kit generate",
-    "db:push": "drizzle-kit push",
-    "db:migrate": "drizzle-kit migrate",
-    "vercel-build": "npm run db:generate && npm run build"
+    "start": "node dist/src/index.js",
+    "vercel-build": "npm run build"
   },
   "keywords": [],
   "author": "",
