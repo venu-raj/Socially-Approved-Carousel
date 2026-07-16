@@ -18,6 +18,16 @@ app.use(express.urlencoded({ extended: true }));
 // Routes
 app.use("/api/videos", videoRouter);
 
+// Home Route
+app.get("/", (req, res) => {
+  res.send("Welcome to Home!!!!!!!");
+});
+
+// API Route
+app.get("/api", (req, res) => {
+  res.send("Welcome to Api!!!!!!!");
+});
+
 // Health check
 app.get("/api/health", (req, res) => {
   res.json({
@@ -27,32 +37,22 @@ app.get("/api/health", (req, res) => {
   });
 });
 
-// Error handler
-app.use(
-  (
-    err: any,
-    req: express.Request,
-    res: express.Response,
-    next: express.NextFunction,
-  ) => {
-    console.error(err.stack);
-    res.status(500).json({
-      success: false,
-      error:
-        process.env.NODE_ENV === "production"
-          ? "Internal server error"
-          : err.message,
-    });
-  },
-);
+app.use((err: any, res: express.Response) => {
+  console.error(err.stack);
+  res.status(500).json({
+    success: false,
+    error:
+      process.env.NODE_ENV === "production"
+        ? "Internal server error"
+        : err.message,
+  });
+});
 
-// CRITICAL: Export for Vercel serverless
-export default app;
-
-// Only listen when not on Vercel
 if (process.env.NODE_ENV !== "production") {
   const port = process.env.PORT || 8000;
   app.listen(port, () => {
     console.log(`🚀 Server started on port ${port}`);
   });
 }
+
+export default app;
