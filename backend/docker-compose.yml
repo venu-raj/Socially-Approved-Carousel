@@ -8,12 +8,12 @@ services:
       - PORT=8000
       - DATABASE_URL=postgresql://postgres:test123@db:5432/mydb
       - NODE_ENV=development
+      - FRONTEND_URL=http://localhost:3000
     depends_on:
       - db
     volumes:
       - ./:/app
-      - /app/node_modules  
-      - /app/dist  
+      - /app/node_modules
     command: npm run dev
 
   db:
