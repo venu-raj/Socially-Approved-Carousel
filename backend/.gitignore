@@ -1,1 +1,14 @@
 node_modules/
+.env
+
+curl -X POST https://socially-approve-git-4ff0c7-venurajjoker2580-gmailcoms-projects.vercel.app/videos \                                                  
+  -H "Content-Type: application/json" \                             
+  -d '{                            
+    "title": "Amazing Tutorial",      
+    "description": "This is an amazing tutorial video",  
+    "videoUrl": "https://example.com/videos/tutorial.mp4",               
+    "thumbnail": "https://example.com/thumbnails/tutorial.jpg",
+    "customerName": "John Doe",                                     
+    "customerTitle": "Senior Developer",     
+    "avatarUrl": "https://example.com/avatars/john.jpg"   
+  }'                   

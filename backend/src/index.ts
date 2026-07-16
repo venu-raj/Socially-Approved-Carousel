@@ -5,22 +5,13 @@ import videoRouter from "./routes/video";
 const app = express();
 
 const corsOptions = {
-  origin: [process.env.FRONTEND_URL || "http://localhost:3000"],
+  origin: [process.env.FRONTEND_URL || "http://localhost:3000"].filter(Boolean),
   methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
-  allowedHeaders: [
-    "Content-Type",
-    "Authorization",
-    "X-Requested-With",
-    "Accept",
-    "Origin",
-  ],
+  allowedHeaders: ["Content-Type", "Authorization"],
   credentials: true,
-  maxAge: 86400,
 };
 
 app.use(cors(corsOptions));
-app.options("*", cors(corsOptions));
-
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -28,11 +19,11 @@ app.use(express.urlencoded({ extended: true }));
 app.use("/api/videos", videoRouter);
 
 // Health check
-app.get("/api", (req, res) => {
+app.get("/api/health", (req, res) => {
   res.json({
-    message: "Welcome to my app!",
-    environment: process.env.NODE_ENV,
+    status: "ok",
     timestamp: new Date().toISOString(),
+    env: process.env.NODE_ENV,
   });
 });
 
@@ -49,11 +40,19 @@ app.use(
       success: false,
       error:
         process.env.NODE_ENV === "production"
-          ? "Something went wrong!"
+          ? "Internal server error"
           : err.message,
     });
   },
 );
 
-// Export for Vercel serverless
+// CRITICAL: Export for Vercel serverless
 export default app;
+
+// Only listen when not on Vercel
+if (process.env.NODE_ENV !== "production") {
+  const port = process.env.PORT || 8000;
+  app.listen(port, () => {
+    console.log(`🚀 Server started on port ${port}`);
+  });
+}
