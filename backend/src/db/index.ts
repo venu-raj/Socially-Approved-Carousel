@@ -1,7 +1,7 @@
 import { Pool } from "pg";
 import { drizzle } from "drizzle-orm/node-postgres";
 
-const connectionString = process.env.DATABASE_URL;
+const connectionString = process.env.DATABASE_URL ?? "";
 
 const globalForDb = globalThis as unknown as {
   pool: Pool | undefined;
